@@ -8,5 +8,12 @@ export function recipeReducer(state, action) {
       return { ...state, recipes: action.payload };
     case "ADD":
       return { ...state, recipes: [...state.recipes, action.payload] };
+    case "UPDATE":
+          return {
+        ...state,
+        recipes: state.recipes.map((recipe) =>
+          recipe.id === action.payload.id ? action.payload : recipe
+        )
+      };
   }
 }
