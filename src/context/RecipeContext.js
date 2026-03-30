@@ -4,7 +4,7 @@ import { createElement } from "react";
 
 const RecipeContext = createContext();
 
-export function recipeProvider({ childred }) {
+export function recipeProvider({ children }) {
   const [state, dispatch] = useReducer(recipeReducer, initialState);
 
   //local storage loading
@@ -21,4 +21,14 @@ export function recipeProvider({ childred }) {
   useEffect(()=> {
    localStorage.setItem('recipes', JSON.stringify(state.recipes))
   }, [state.recipes])
+  
+  return (
+    <RecipeContext.Provider value={{state, dispatch}}>
+       {children}
+    </RecipeContext.Provider>
+  )
+}
+
+export function useRecipe() {
+    return useContext(RecipeContext)
 }
