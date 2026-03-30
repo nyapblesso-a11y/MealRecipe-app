@@ -1,9 +1,9 @@
 import React from 'react'
-
+import "./SearchBar.css"
 function SearchBar() {
   return (
-    <div className='search'>
-   <input type="text" className='text' placeholder='search your meal here' />
+    <div className='search-container'>
+   <input type="text" className='search-input' placeholder='search your meal here' />
     </div>
   )
 }
