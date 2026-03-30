@@ -20,5 +20,15 @@ export function recipeReducer(state, action) {
         ...state,
         recipes: state.recipes.filter((recipe) => recipe.id !== action.payload),
       };
+
+    case "TOGGLE_FAVORITE":
+      return {
+        ...state,
+        recipes: state.recipes.map((recipe) =>
+          recipe.id === action.payload
+            ? { ...recipe, favorite: !recipe.favorite }
+            : recipe
+        ),
+      };
   }
 }
