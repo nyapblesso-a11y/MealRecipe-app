@@ -9,11 +9,16 @@ export function recipeReducer(state, action) {
     case "ADD":
       return { ...state, recipes: [...state.recipes, action.payload] };
     case "UPDATE":
-          return {
+      return {
         ...state,
         recipes: state.recipes.map((recipe) =>
           recipe.id === action.payload.id ? action.payload : recipe
-        )
+        ),
+      };
+    case "DELETE":
+      return {
+        ...state,
+        recipes: state.recipes.filter((recipe) => recipe.id !== action.payload),
       };
   }
 }
