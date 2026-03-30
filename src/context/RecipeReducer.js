@@ -30,5 +30,8 @@ export function recipeReducer(state, action) {
             : recipe
         ),
       };
+
+      default:
+        return state
   }
 }
