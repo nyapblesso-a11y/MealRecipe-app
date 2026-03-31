@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 import "./SearchBar.css";
 
-function SearchBar({ onSearch }) {
-  const [query, setQuery] = useState("");
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-    onSearch(query);
-  };
+function SearchBar({search, setSearch}) {
+ 
   return (
     <div className="search-container">
       <input
         type="text"
         className="search-input"
         placeholder="Search recipes..."
-        value={query}
-        onChange={handleChange}
+        value={search}
+        onChange={(e)=>setSearch(e.target.value)}
       />
     </div>
   );

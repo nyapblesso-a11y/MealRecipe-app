@@ -6,9 +6,10 @@ import RecipeDrawer from "./components/RecipeDrawer/RecipeDrawer";
 
 function App() {
   const [selectRecipe, setSelectRecipe] = useState(null);
+  const [search, setSearch] = useState("")
   return (
     <>
-      <SearchBar onSearch={() => {}} />
+      <SearchBar search={search} setSearch={setSearch}/>
       <ReceipeForm />
       <RecipeList onSelect={setSelectRecipe} />
       <RecipeDrawer
