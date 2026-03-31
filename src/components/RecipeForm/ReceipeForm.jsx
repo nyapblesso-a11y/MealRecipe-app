@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRecipes } from "../../context/RecipeContext";
 import "./RecipeForm.css"
-function ReceipeForm() {
+function ReceipeForm({setSearch}) {
   const { dispatch } = useRecipes();
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -70,7 +70,7 @@ function ReceipeForm() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <button type="submit" className="submit-btn">Add Recipe</button>
+            <button type="submit" className="submit-btn" onClick={()=> setSearch("")}>Add Recipe</button>
           </form>
         </div>
       )}

@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <SearchBar search={search} setSearch={setSearch} />
-      <ReceipeForm />
+      <ReceipeForm setSearch={setSearch} />
       <RecipeList recipes={filteredRecipes} onSelect={setSelectRecipe} />
       <RecipeDrawer
         recipe={selectRecipe}
