@@ -8,7 +8,6 @@ function RecipeCard({recipe, onClick}) {
         <img src={recipe.image} alt='recipe image'/>
         <div className="card-content">
           <h3>{recipe.name}</h3>
-          <p>{recipe.description || "no description"}</p>
         </div>
       </div>
     </div>
