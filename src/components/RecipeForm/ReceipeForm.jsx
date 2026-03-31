@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRecipes } from "../../context/RecipeContext";
-import "./RecipeDrawer.css"
-function ReceipeDrawer() {
+import "./RecipeForm.css"
+function ReceipeForm() {
   const { dispatch } = useRecipes();
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -81,4 +81,4 @@ function ReceipeDrawer() {
   );
 }
 
-export default ReceipeDrawer;
+export default ReceipeForm;
