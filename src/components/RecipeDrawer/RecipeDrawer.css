@@ -1,0 +1,44 @@
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100%;
+  background: white;
+  padding: 20px;
+  box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+  overflow-y: auto;
+  animation: slideIn 0.3s ease;
+}
+
+.drawer img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  float: right;
+}
+
+@keyframes slideIn {
+  from {
+    right: -350px;
+  }
+  to {
+    right: 0;
+  }
+}
