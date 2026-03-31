@@ -1,12 +1,13 @@
-import { useRecipes } from "../../context/RecipeContext";
+
 import RecipeCard from "../RecipeCard/RecipeCard";
 import "./RecipeList.css";
 
-export default function RecipeList({ onSelect }) {
-  const { state } = useRecipes();
+export default function RecipeList({ onSelect , recipes}) {
+
+
   return (
     <div className="grid">
-      {state.recipes.map((recipe) => (
+      {recipes.map((recipe) => (
         <RecipeCard
           key={recipe.id}
           recipe={recipe}
