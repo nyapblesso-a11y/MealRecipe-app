@@ -11,8 +11,7 @@ function ReceipeForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name || !image || !description) {
-      alert('sorry! name, image or description needed')
+    if (!name || !image ) {
       return
     };
 
@@ -70,7 +69,6 @@ function ReceipeForm() {
               placeholder="Recipe description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              required
             />
             <button type="submit" className="submit-btn">Add Recipe</button>
           </form>
