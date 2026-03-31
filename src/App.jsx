@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SearchBar from './components/SearchBar/SearchBar'
-import RecipeCard from './components/RecipeCard/RecipeCard'
+import RecipeList from './components/RecipeList/RecipeList'
 
 function App() {
+  const [selectRecipe, setSelectRecipe] = useState(null)
   return (
     <>
     <SearchBar onSearch={()=>{}}/>
-      <RecipeCard/>
+    <RecipeList onSelect={setSelectRecipe}/>
     </>
   )
 }

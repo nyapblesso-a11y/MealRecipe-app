@@ -4,7 +4,7 @@ import { createElement } from "react";
 
 const RecipeContext = createContext();
 
-export function recipeProvider({ children }) {
+export function RecipeProvider({ children }) {
   const [state, dispatch] = useReducer(recipeReducer, initialState);
 
   //local storage loading
@@ -29,6 +29,7 @@ export function recipeProvider({ children }) {
   )
 }
 
-export function useRecipe() {
+
+export function useRecipes() {
     return useContext(RecipeContext)
 }

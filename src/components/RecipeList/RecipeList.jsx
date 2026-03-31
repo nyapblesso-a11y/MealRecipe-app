@@ -1,11 +1,18 @@
-import React from 'react'
+import { useRecipes } from "../../context/RecipeContext";
+import RecipeCard from "../RecipeCard/RecipeCard";
+import "./RecipeList.css";
 
-function RecipeForm() {
+export default function RecipeList({ onSelect }) {
+  const { state } = useRecipes();
   return (
-    <div>
-        
+    <div className="grid">
+      {state.recipes.map((recipe) => (
+        <RecipeCard
+          key={recipe.id}
+          recipe={recipe}
+          onClick={() => onSelect(recipe)}
+        />
+      ))}
     </div>
-  )
+  );
 }
-
-export default RecipeForm
