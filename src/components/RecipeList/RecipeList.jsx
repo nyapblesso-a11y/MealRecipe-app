@@ -2,7 +2,7 @@
 import RecipeCard from "../RecipeCard/RecipeCard";
 import "./RecipeList.css";
 
-export default function RecipeList({ onSelect , recipes}) {
+export default function RecipeList({ onSelect , recipes, dispatch}) {
 
 
   return (
@@ -12,6 +12,7 @@ export default function RecipeList({ onSelect , recipes}) {
           key={recipe.id}
           recipe={recipe}
           onClick={() => onSelect(recipe)}
+          dispatch={dispatch}
         />
       ))}
     </div>

@@ -8,7 +8,7 @@ import { useRecipes } from "./context/RecipeContext";
 function App() {
   const [selectRecipe, setSelectRecipe] = useState(null);
   const [search, setSearch] = useState("");
-  const { state } = useRecipes();
+  const { state, dispatch } = useRecipes();
 
   const filteredRecipes = state.recipes.filter((recipe) =>
     recipe.name.toLowerCase().includes(search.toLowerCase())
@@ -21,7 +21,7 @@ function App() {
     <>
       <SearchBar search={search} setSearch={setSearch} />
       <ReceipeForm setSearch={setSearch} />
-      <RecipeList recipes={filteredRecipes} onSelect={setSelectRecipe} />
+      <RecipeList recipes={filteredRecipes} onSelect={setSelectRecipe} dispatch={dispatch}/>
       <RecipeDrawer
         recipe={selectRecipe}
         onClose={() => setSelectRecipe(null)}
