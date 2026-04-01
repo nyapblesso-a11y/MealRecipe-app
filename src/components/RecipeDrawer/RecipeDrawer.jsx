@@ -37,10 +37,9 @@ export default function RecipeDrawer({ recipe, onClose }) {
   }
 
   return (
-    <div className="drawer-overlay">
-      <div className="drawer">
-
-        <button className="close-btn" onClick={onClose}>
+    <div className="drawer-overlay"onClick={onClose}>
+      <div className="drawer"onClick={(e)=> e.stopPropagation()}>
+        <button className="close-btn"  onClick={onClose}>
           ✖
         </button>
 
@@ -52,12 +51,11 @@ export default function RecipeDrawer({ recipe, onClose }) {
 
             <p>{recipe.description}</p>
 
-            <button onClick={() => setIsEditing(true)}>
-              Edit
-            </button>
+            <button onClick={() => setIsEditing(true)}>Edit Recipe</button>
           </>
         ) : (
           <>
+            <h2>Edit Recipe</h2>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -76,12 +74,9 @@ export default function RecipeDrawer({ recipe, onClose }) {
               placeholder="Description"
             />
 
-            <button onClick={handleUpdate}>
-              Save
-            </button>
+            <button onClick={handleUpdate}>Save</button>
           </>
         )}
-
       </div>
     </div>
   );
