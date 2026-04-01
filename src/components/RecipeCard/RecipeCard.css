@@ -8,6 +8,7 @@
   flex-direction: column;
   box-shadow: 0 12px 40px rgba(147, 51, 234, 0.12);
   transition: transform 0.3s ease;
+  position: relative;
 }
 
 .card:hover {
@@ -48,5 +49,18 @@
 }
 
 .heart {
-    display: f;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.heart.active {
+  color: red;
 }

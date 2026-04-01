@@ -10,7 +10,7 @@ function RecipeCard({ recipe, onClick, dispatch }) {
           <h3>{recipe.name}</h3>
         </div>
 
-        <button
+        <span
           className="heart"
           onClick={(e) => {
             e.stopPropagation();
@@ -19,7 +19,7 @@ function RecipeCard({ recipe, onClick, dispatch }) {
               payload: recipe.id,
             });
           }}
-        >{recipe.favorite ? "❤️" : "🤍"}</button>
+        >{recipe.favorite ? "❤️" : "🤍"}</span>
       </div>
     </div>
   );
