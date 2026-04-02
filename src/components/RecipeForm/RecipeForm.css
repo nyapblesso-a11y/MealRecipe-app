@@ -225,6 +225,9 @@ body {
   .form {
     padding: 40px 15px 20px 15px;
     max-width: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .card-content h3 { font-size: 1.1rem; }
   .form h3 { font-size: 1.2rem; }

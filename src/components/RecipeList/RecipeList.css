@@ -1,5 +1,17 @@
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;      
+  gap: 30px;             
+  justify-content: center; 
+  align-items: flex-start;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 1400px;     
+  margin: 0 auto;        
+}
+
+.card {
+  width: 320px;
+  height: 320px;
+  flex-shrink: 0;      
 }

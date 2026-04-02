@@ -36,7 +36,6 @@ function ReceipeForm({setSearch}) {
   return (
     <>
      <div className="container">
-      {/* 1. The Toggle Button */}
       {!showForm && (
         <button className="toggle-btn" onClick={() => setShowForm(true)}>
           + Add New Recipe
