@@ -7,8 +7,8 @@ function SearchBar({search, setSearch}) {
     <>
   <header className="app-header">
   <div className="logo-section">
-    <div className="logo-icon">💜</div> {/* You can replace this emoji with an <img> tag */}
-    <h1 className="app-title">Yarm<span>Recipes</span></h1>
+    <div className="app-logo"><img src="https://img.icons8.com/color/100/null/restaurant.png" alt="image-logo" /></div>
+    <h1 className="app-title">Flavor<span>Node</span></h1>
   </div>
 
   <div className="search-container">
@@ -19,7 +19,6 @@ function SearchBar({search, setSearch}) {
       value={search}
       onChange={(e) => setSearch(e.target.value)}
     />
-    <span className="search-icon">🔍</span>
   </div>
 </header>
 </>

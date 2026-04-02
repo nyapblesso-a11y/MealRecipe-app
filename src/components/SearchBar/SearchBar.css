@@ -1,63 +1,98 @@
-
+/* --- Modernized Header Section --- */
 .app-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background: #ffffff;
+  padding: 12px 40px; /* Slightly slimmer height for a modern look */
+  
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.85); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* Sticky Position - keeps it at the top while scrolling */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  
+  /* A softer, layered shadow for depth */
   border-bottom: 1px solid rgba(147, 51, 234, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   gap: 20px;
+  transition: all 0.3s ease;
 }
 
+/* Logo Section Adjustments */
 .logo-section {
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 }
 
-.logo-icon {
-  font-size: 1.8rem;
-  filter: drop-shadow(0 4px 8px rgba(147, 51, 234, 0.2));
+.app-logo {
+  width: 42px; 
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* Ensure the image inside stays contained */
+.app-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(147, 51, 234, 0.2));
+}
+
+.logo-section:hover .app-logo {
+  transform: rotate(-12deg) scale(1.1);
+}
+
+/* Title Typography */
 .app-title {
-  font-size: 1.5rem;
+  font-size: 1.4rem; /* Slightly smaller for elegance */
   font-weight: 900;
-  color: #1e293b;
+  color: #0f172a; /* Deeper slate for better contrast */
   margin: 0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .app-title span {
-  background: linear-gradient(90deg, #9333ea, #db2777);
+  background: linear-gradient(135deg, #9333ea, #db2777); /* Angled gradient looks better */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-
+/* --- Elevated Search Bar --- */
 .search-container {
   position: relative;
   width: 100%;
-  max-width: 350px; 
+  max-width: 320px; 
 }
 
 .search-input {
   width: 100%;
-  padding: 12px 16px 12px 40px; 
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  padding: 10px 16px 10px 42px; 
+  border-radius: 14px; /* More rounded */
+  border: 1.5px solid #f1f5f9;
   background: #f8fafc;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  color: #334155;
   outline: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .search-input:focus {
   border-color: #9333ea;
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.08);
+  width: 110%; /* Subtle expansion effect when clicking */
+  margin-left: -10%; /* Anchors the expansion */
+  box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.15);
 }
 
 .search-icon {
@@ -65,25 +100,41 @@
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1rem;
-  opacity: 0.5;
+  font-size: 0.9rem;
+  filter: grayscale(1);
+  opacity: 0.4;
   pointer-events: none;
+  transition: opacity 0.3s;
 }
 
+.search-input:focus + .search-icon {
+  opacity: 0.8;
+  filter: grayscale(0);
+}
 
-@media (max-width: 600px) {
+/* --- Responsive Adjustments --- */
+@media (max-width: 650px) {
   .app-header {
-    flex-direction: column; 
     padding: 15px 20px;
-    gap: 15px;
+  }
+  
+  .search-input:focus {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    flex-direction: row; /* Keep it horizontal on mobile for a cleaner look */
+    justify-content: space-between;
+  }
+  
+  .app-title {
+    display: none; /* Hide text on very small screens to save space */
   }
 
   .search-container {
-    max-width: 100%; 
+    max-width: 180px; /* Small search bar for mobile */
   }
-}
-
-@media (max-width: 320px) {
-  .app-title { font-size: 1.2rem; }
-  .logo-icon { font-size: 1.5rem; }
 }
