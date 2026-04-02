@@ -1,22 +1,21 @@
 import { React, useContext, useReducer, useEffect, createContext } from "react";
 import { initialState, recipeReducer } from "./RecipeReducer";
-import { createElement } from "react";
+
 
 const RecipeContext = createContext();
 
 export function RecipeProvider({ children }) {
-  const [state, dispatch] = useReducer(recipeReducer, initialState);
+const [state, dispatch] = useReducer(
+  recipeReducer,
+  initialState,
+  (initial) => {
+    const stored = localStorage.getItem("recipes");
+    return stored
+      ? { recipes: JSON.parse(stored) }
+      : initial;
+  }
+);
 
-  //local storage loading
-  useEffect(() => {
-    const storeRecipe = localStorage.getItem("recipes");
-    if (storeRecipe) {
-      dispatch({
-        type: "SET_RECIPES",
-        payload: JSON.parse(storeRecipe),
-      });
-    }
-  }, []);
 
   useEffect(()=> {
    localStorage.setItem('recipes', JSON.stringify(state.recipes))
