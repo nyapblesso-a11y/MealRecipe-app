@@ -36,6 +36,15 @@ export default function RecipeDrawer({ recipe, onClose }) {
     setIsEditing(false);
   }
 
+  function handledelete () {
+    dispatch({
+      type: "DELETE",
+      payload: recipe.id
+    })
+
+    onClose()
+  }
+
   return (
     <div className="drawer-overlay"onClick={onClose}>
       <div className="drawer"onClick={(e)=> e.stopPropagation()}>
@@ -52,6 +61,7 @@ export default function RecipeDrawer({ recipe, onClose }) {
             <p>{recipe.description}</p>
 
             <button onClick={() => setIsEditing(true)}>Edit Recipe</button>
+            <button onClick={handledelete}>Delete Recipe</button>
           </>
         ) : (
           <>
