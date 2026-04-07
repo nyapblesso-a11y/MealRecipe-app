@@ -1,29 +1,27 @@
-/* --- Modernized Header Section --- */
+
 .app-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 40px; /* Slightly slimmer height for a modern look */
-  
-  /* Glassmorphism Effect */
+  padding: 12px 40px; 
   background: rgba(255, 255, 255, 0.85); 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   
-  /* Sticky Position - keeps it at the top while scrolling */
+
   position: sticky;
   top: 0;
   z-index: 1000;
   
-  /* A softer, layered shadow for depth */
+
   border-bottom: 1px solid rgba(147, 51, 234, 0.1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   gap: 20px;
   transition: all 0.3s ease;
 }
 
-/* Logo Section Adjustments */
+
 .logo-section {
   display: flex;
   align-items: center;
@@ -40,7 +38,7 @@
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Ensure the image inside stays contained */
+
 .app-logo img {
   width: 100%;
   height: 100%;
@@ -52,22 +50,22 @@
   transform: rotate(-12deg) scale(1.1);
 }
 
-/* Title Typography */
+
 .app-title {
-  font-size: 1.4rem; /* Slightly smaller for elegance */
+  font-size: 1.4rem; 
   font-weight: 900;
-  color: #0f172a; /* Deeper slate for better contrast */
+  color: #0f172a;
   margin: 0;
   letter-spacing: -0.04em;
 }
 
 .app-title span {
-  background: linear-gradient(135deg, #9333ea, #db2777); /* Angled gradient looks better */
+  background: linear-gradient(135deg, #9333ea, #db2777); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* --- Elevated Search Bar --- */
+
 .search-container {
   position: relative;
   width: 100%;
@@ -77,7 +75,7 @@
 .search-input {
   width: 100%;
   padding: 10px 16px 10px 42px; 
-  border-radius: 14px; /* More rounded */
+  border-radius: 14px; 
   border: 1.5px solid #f1f5f9;
   background: #f8fafc;
   font-family: inherit;
@@ -90,8 +88,8 @@
 .search-input:focus {
   border-color: #9333ea;
   background: #ffffff;
-  width: 110%; /* Subtle expansion effect when clicking */
-  margin-left: -10%; /* Anchors the expansion */
+  width: 110%; 
+  margin-left: -10%;
   box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.15);
 }
 
@@ -112,7 +110,6 @@
   filter: grayscale(0);
 }
 
-/* --- Responsive Adjustments --- */
 @media (max-width: 650px) {
   .app-header {
     padding: 15px 20px;
@@ -126,15 +123,74 @@
 
 @media (max-width: 480px) {
   .app-header {
-    flex-direction: row; /* Keep it horizontal on mobile for a cleaner look */
+    flex-direction: row; 
     justify-content: space-between;
   }
   
   .app-title {
-    display: none; /* Hide text on very small screens to save space */
+    display: none; 
   }
 
   .search-container {
-    max-width: 180px; /* Small search bar for mobile */
+    max-width: 180px; 
+  }
+}
+
+
+.filter {
+  display: flex;
+  gap: 6px;
+  background: #f1f5f9; 
+  padding: 5px;
+  border-radius: 18px;
+  border: 1px solid rgba(147, 51, 234, 0.08);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  width: fit-content;
+}
+
+
+.filter button {
+  padding: 8px 18px;
+  border: none;
+  background: transparent;
+  color: #64748b; 
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter button:hover {
+  color: #9333ea;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.filter button.active, 
+.filter button:focus { 
+  background: #ffffff;
+  color: #9333ea;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.12);
+  transform: translateY(-1px);
+}
+
+
+.filter button:last-child:hover {
+  color: #db2777; 
+}
+
+@media (max-width: 600px) {
+  .filter {
+    padding: 4px;
+    gap: 4px;
+  }
+  
+  .filter button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 }
