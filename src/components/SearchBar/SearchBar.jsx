@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchBar.css";
 
-function SearchBar({ search, setSearch,setFilter }) {
+function SearchBar({ search, setSearch, setFilter }) {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.body.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
   return (
     <>
       <header className="app-header">
@@ -29,6 +35,14 @@ function SearchBar({ search, setSearch,setFilter }) {
         <div className="filter">
           <button onClick={() => setFilter("all")}>All</button>
           <button onClick={() => setFilter("favorites")}>Favorites</button>
+        </div>
+
+        <div className="them">
+          <button
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          >
+            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+          </button>
         </div>
       </header>
     </>

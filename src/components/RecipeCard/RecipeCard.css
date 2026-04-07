@@ -51,3 +51,9 @@
   padding-right: 60px; 
   text-align: left;    
 }
+
+/* dark mode override */
+body.dark .card {
+  background: #1e1e1e;
+  color: white;
+}

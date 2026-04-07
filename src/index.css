@@ -22,3 +22,14 @@ body {
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+body.light {
+  background: #f5f5f5;
+  color: #111;
+}
+
+/* DARK MODE */
+body.dark {
+  background: #121212;
+  color: #fff;
+}

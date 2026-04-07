@@ -132,3 +132,9 @@
     padding: 60px 20px 20px 20px;
   }
 }
+
+body.dark .drawer {
+  background: #1e1e1e;
+  color: white;
+}
+
