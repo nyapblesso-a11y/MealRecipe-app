@@ -52,8 +52,8 @@
   text-align: left;    
 }
 
-/* dark mode override */
+
 body.dark .card {
   background: #1e1e1e;
-  color: white;
+  color: rgb(37, 33, 33);
 }
