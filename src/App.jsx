@@ -9,19 +9,28 @@ function App() {
   const [selectRecipe, setSelectRecipe] = useState(null);
   const [search, setSearch] = useState("");
   const { state, dispatch } = useRecipes();
+  const [filter, setFilter] = useState("all");
 
-  const filteredRecipes = state.recipes.filter((recipe) =>
+const filteredRecipes = state.recipes
+  .filter((recipe) =>
     recipe.name.toLowerCase().includes(search.toLowerCase())
+  )
+  .filter((recipe) =>
+    filter === "favorites" ? recipe.favorite : true
   );
-
-  console.log("search", search)
-  console.log("filtered search", filteredRecipes)
+  console.log("search", search);
+  console.log("filtered search", filteredRecipes);
 
   return (
     <>
-      <SearchBar search={search} setSearch={setSearch} />
+      
+      <SearchBar search={search} setSearch={setSearch} setFilter={setFilter} />
       <ReceipeForm setSearch={setSearch} />
-      <RecipeList recipes={filteredRecipes} onSelect={setSelectRecipe} dispatch={dispatch}/>
+      <RecipeList
+        recipes={filteredRecipes}
+        onSelect={setSelectRecipe}
+        dispatch={dispatch}
+      />
       <RecipeDrawer
         recipe={selectRecipe}
         onClose={() => setSelectRecipe(null)}
