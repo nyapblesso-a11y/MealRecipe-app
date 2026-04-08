@@ -12,7 +12,7 @@ const [state, dispatch] = useReducer(
     const stored = localStorage.getItem("recipes");
     return stored
       ? { recipes: JSON.parse(stored) }
-      : initial;
+        : initial;
   }
 );
 

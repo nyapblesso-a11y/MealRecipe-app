@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./SearchBar.css";
 
-function SearchBar({ search, setSearch, setFilter }) {
+function SearchBar({ search, setSearch, setFilter, state, filter }) {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
+  const totalRecipes = state.recipes.length;
+
+  const favoriteRecipes = state.recipes.filter(
+    (recipe) => recipe.favorite
+  ).length;
   useEffect(() => {
     document.body.className = theme;
     localStorage.setItem("theme", theme);
@@ -33,8 +38,19 @@ function SearchBar({ search, setSearch, setFilter }) {
           />
         </div>
         <div className="filter">
-          <button onClick={() => setFilter("all")}>All</button>
-          <button onClick={() => setFilter("favorites")}>Favorites</button>
+          <button
+            className={filter === "all" ? "active" : ""}
+            onClick={() => setFilter("all")}
+          >
+            All <span className="badge">{totalRecipes}</span>
+          </button>
+
+          <button
+            className={filter === "favorites" ? "active" : ""}
+            onClick={() => setFilter("favorites")}
+          >
+            Favorites <span className="badge">{favoriteRecipes}</span>
+          </button>
         </div>
 
         <div className="them">

@@ -24,7 +24,7 @@ const filteredRecipes = state.recipes
   return (
     <>
       
-      <SearchBar search={search} setSearch={setSearch} setFilter={setFilter} />
+      <SearchBar search={search} setSearch={setSearch} setFilter={setFilter} state={state} filter={filter}/>
       <ReceipeForm setSearch={setSearch} />
       <RecipeList
         recipes={filteredRecipes}
