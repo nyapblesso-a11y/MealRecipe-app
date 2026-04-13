@@ -18,8 +18,6 @@ const filteredRecipes = state.recipes
   .filter((recipe) =>
     filter === "favorites" ? recipe.favorite : true
   );
-  console.log("search", search);
-  console.log("filtered search", filteredRecipes);
 
   return (
     <>
