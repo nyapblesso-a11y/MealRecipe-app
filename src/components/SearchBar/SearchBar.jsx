@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SearchBar.css";
+import TypewriterComponent from "typewriter-effect";
 
 function SearchBar({ search, setSearch, setFilter, state, filter }) {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -24,7 +25,7 @@ function SearchBar({ search, setSearch, setFilter, state, filter }) {
             />
           </div>
           <h1 className="app-title">
-            Flavor<span>Node</span>
+            Flavor<span><TypewriterComponent/></span>
           </h1>
         </div>
 
