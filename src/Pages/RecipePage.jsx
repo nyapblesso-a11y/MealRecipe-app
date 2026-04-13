@@ -1,10 +1,9 @@
-import React from "react";
 import React, { useState } from "react";
-import SearchBar from "./components/SearchBar/SearchBar";
-import RecipeList from "./components/RecipeList/RecipeList";
-import ReceipeForm from "./components/RecipeForm/ReceipeForm";
-import RecipeDrawer from "./components/RecipeDrawer/RecipeDrawer";
-import { useRecipes } from "./context/RecipeContext";
+import SearchBar from "../components/SearchBar/SearchBar";
+import RecipeList from "../components/RecipeList/RecipeList";
+import ReceipeForm from "../components/RecipeForm/ReceipeForm";
+import RecipeDrawer from "../components/RecipeDrawer/RecipeDrawer";
+import { useRecipes } from "../context/RecipeContext";
 
 
 function RecipePage() {
