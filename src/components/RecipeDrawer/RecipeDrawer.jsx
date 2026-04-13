@@ -9,6 +9,7 @@ export default function RecipeDrawer({ recipe, onClose }) {
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
+  const [imageMode, setImageMode] = useState("url")
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -16,6 +17,12 @@ export default function RecipeDrawer({ recipe, onClose }) {
       setName(recipe.name || "");
       setImage(recipe.image || "");
       setDescription(recipe.description || "");
+      // detect mode
+    if (recipe.image?.startsWith("data:") || recipe.image?.startsWith("blob:")) {
+      setImageMode("file");
+    } else {
+      setImageMode("url");
+    }
       setIsEditing(false);
     }
   }, [recipe]);
@@ -65,26 +72,66 @@ export default function RecipeDrawer({ recipe, onClose }) {
           </>
         ) : (
           <>
-            <h2>Edit Recipe</h2>
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Recipe name"
-            />
+            <>
+  <h2>Edit Recipe</h2>
 
-            <input
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              placeholder="Image URL"
-            />
+  {/* NAME */}
+  <input
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    placeholder="Recipe name"
+  />
 
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Description"
-            />
+  {/* IMAGE URL */}
+  <input
+    type="text"
+    placeholder="Image URL"
+    value={imageMode === "url" ? image : ""}
+    onChange={(e) => {
+      setImageMode("url");
+      setImage(e.target.value);
+    }}
+  />
 
-            <button onClick={handleUpdate}>Save</button>
+  {/* FILE UPLOAD */}
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      setImageMode("file");
+
+      const preview = URL.createObjectURL(file);
+      setImage(preview);
+    }}
+  />
+
+  {/* PREVIEW */}
+  {image && (
+    <img
+      src={image}
+      alt="preview"
+      style={{
+        width: "120px",
+        height: "120px",
+        objectFit: "cover",
+        marginTop: "10px",
+        borderRadius: "8px",
+      }}
+    />
+  )}
+
+  {/* DESCRIPTION */}
+  <textarea
+    value={description}
+    onChange={(e) => setDescription(e.target.value)}
+    placeholder="Description"
+  />
+
+  <button onClick={handleUpdate}>Save</button>
+</>
           </>
         )}
       </div>

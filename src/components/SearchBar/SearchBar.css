@@ -80,6 +80,7 @@ body.dark {
   background: linear-gradient(135deg, #9333ea, #db2777); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-size: 15px;
 }
 
 

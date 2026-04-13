@@ -3,30 +3,30 @@ import "./RecipeCard.css";
 
 function RecipeCard({ recipe, onClick, dispatch }) {
   return (
-    <div>
-<div className="card" onClick={onClick}>
-  <div className="heart-container">
-    <span
-      className="heart"
-      onClick={(e) => {
-        e.stopPropagation();
-        dispatch({
-          type: "TOGGLE_FAVORITE",
-          payload: recipe.id,
-        });
-      }}
-    >
-      {recipe.favorite ? "❤️" : "🤍"}
-    </span>
-  </div>
+    <div className="card" onClick={onClick}>
+      {/* HEART BUTTON */}
+      <div 
+        className={`heart-btn ${recipe.favorite ? "is-favorite" : ""}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch({
+            type: "TOGGLE_FAVORITE",
+            payload: recipe.id,
+          });
+        }}
+      >
+        {recipe.favorite ? "❤️" : "🤍"}
+      </div>
 
-  <img src={recipe.image} alt={recipe.name} />
-  
-  <div className="card-content">
-    <h3>{recipe.name}</h3>
-    <span className="view-details">View Details →</span>
-  </div>
-</div>
+      <div className="card-image-box">
+        <img src={recipe.image} alt={recipe.name} />
+      </div>
+      
+      <div className="card-content">
+        <h3>{recipe.name}</h3>
+        <p className="card-tag">Homemade Recipe</p>
+        <span className="view-link">View Details →</span>
+      </div>
     </div>
   );
 }

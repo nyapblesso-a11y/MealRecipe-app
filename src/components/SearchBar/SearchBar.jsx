@@ -25,7 +25,11 @@ function SearchBar({ search, setSearch, setFilter, state, filter }) {
             />
           </div>
           <h1 className="app-title">
-            Flavor<span><TypewriterComponent/></span>
+            Flavor<span><TypewriterComponent options={{
+              strings: ['Think', 'Enjoy','Create', 'Your', 'Favorite', 'Recipe'],
+              autoStart: true,
+              loop: true
+            }}/></span>
           </h1>
         </div>
 
