@@ -16,7 +16,12 @@ function LandingPage() {
               {" "}
               <TypewriterComponent
                 options={{
-                  strings: ["Kitchen", "Recipes", "Meals", "Cooking"],
+                  strings: [
+                    "Digital Cookbook",
+                    "Culinary Workflow",
+                    "Kitchen Creativity",
+                    "Secret Recipes",
+                  ],
                   autoStart: true,
                   loop: true,
                   wrapperClassName: "typewriter-text",
@@ -25,8 +30,7 @@ function LandingPage() {
             </span>
           </h1>
           <p className="hero-subtitle">
-            The intelligent recipe engine designed for modern chefs. Organize,
-            discover, and build your digital cookbook in seconds.
+            FlavorNode is the modern workspace for your recipes. Ditch the messy folders and build a stunning, searchable digital library in seconds.
           </p>
 
           <div className="actions">
@@ -47,7 +51,7 @@ function LandingPage() {
         <div className="hero-visual">
           <div className="glass-card">
             <img
-              src="https://images.ctfassets.net/3s5io6mnxfqz/6lmLSgTSH5Lgi7z59asp25/27eaea12087d66e6be41eac392e0f15b/63__Scene_C_DSC01914.jpg?w=828" 
+              src="https://images.ctfassets.net/3s5io6mnxfqz/6lmLSgTSH5Lgi7z59asp25/27eaea12087d66e6be41eac392e0f15b/63__Scene_C_DSC01914.jpg?w=828"
               alt="App Preview"
             />
             <div className="glass-footer">

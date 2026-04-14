@@ -1,6 +1,32 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-header: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+.hero-title {
+  font-family: var(--font-header);
+  letter-spacing: -0.03em;
+}
+
+textarea {
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
 }
 
 body {
@@ -28,7 +54,6 @@ body.light {
   color: #111;
 }
 
-/* DARK MODE */
 body.dark {
   background: #121212;
   color: #fff;
