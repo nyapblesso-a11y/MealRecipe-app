@@ -94,7 +94,7 @@ function ReceipeForm({ setSearch }) {
 
                   {!image ? (
                     <div className="upload-prompt">
-                      <span className="icon">📸</span>
+                      {/* <span className="icon">📸</span> */}
                       <p>Click to upload image</p>
                     </div>
                   ) : (

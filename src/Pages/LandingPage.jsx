@@ -12,14 +12,17 @@ function LandingPage() {
         <div className="hero-content">
           <h1 className="hero-title">
             Master Your <br />
-          <span> <TypewriterComponent
-              options={{
-                strings: ["Kitchen", "Recipes", "Meals", "Cooking"],
-                autoStart: true,
-                loop: true,
-                wrapperClassName: "typewriter-text",
-              }}
-            /></span> 
+            <span>
+              {" "}
+              <TypewriterComponent
+                options={{
+                  strings: ["Kitchen", "Recipes", "Meals", "Cooking"],
+                  autoStart: true,
+                  loop: true,
+                  wrapperClassName: "typewriter-text",
+                }}
+              />
+            </span>
           </h1>
           <p className="hero-subtitle">
             The intelligent recipe engine designed for modern chefs. Organize,
@@ -44,11 +47,13 @@ function LandingPage() {
         <div className="hero-visual">
           <div className="glass-card">
             <img
-              src="https://img.icons8.com/color/144/null/restaurant.png"
-              alt="Logo"
+              src="https://images.ctfassets.net/3s5io6mnxfqz/6lmLSgTSH5Lgi7z59asp25/27eaea12087d66e6be41eac392e0f15b/63__Scene_C_DSC01914.jpg?w=828" 
+              alt="App Preview"
             />
-            <h3>FlavorNode v1.0</h3>
-            <p>Ready to cook?</p>
+            <div className="glass-footer">
+              <h3>FlavorNode Pro</h3>
+              <p>Version 1.0.4 - Latest Update</p>
+            </div>
           </div>
         </div>
       </section>

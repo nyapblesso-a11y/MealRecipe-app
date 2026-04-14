@@ -9,7 +9,7 @@ export default function RecipeDrawer({ recipe, onClose }) {
 
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  const [imageMode, setImageMode] = useState("url")
+  const [imageMode, setImageMode] = useState("url");
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -18,11 +18,14 @@ export default function RecipeDrawer({ recipe, onClose }) {
       setImage(recipe.image || "");
       setDescription(recipe.description || "");
       // detect mode
-    if (recipe.image?.startsWith("data:") || recipe.image?.startsWith("blob:")) {
-      setImageMode("file");
-    } else {
-      setImageMode("url");
-    }
+      if (
+        recipe.image?.startsWith("data:") ||
+        recipe.image?.startsWith("blob:")
+      ) {
+        setImageMode("file");
+      } else {
+        setImageMode("url");
+      }
       setIsEditing(false);
     }
   }, [recipe]);
@@ -43,19 +46,19 @@ export default function RecipeDrawer({ recipe, onClose }) {
     setIsEditing(false);
   }
 
-  function handledelete () {
+  function handledelete() {
     dispatch({
       type: "DELETE",
-      payload: recipe.id
-    })
+      payload: recipe.id,
+    });
 
-    onClose()
+    onClose();
   }
 
   return (
-    <div className="drawer-overlay"onClick={onClose}>
-      <div className="drawer"onClick={(e)=> e.stopPropagation()}>
-        <button className="close-btn"  onClick={onClose}>
+    <div className="drawer-overlay" onClick={onClose}>
+      <div className="drawer" onClick={(e) => e.stopPropagation()}>
+        <button className="close-btn" onClick={onClose}>
           ✖
         </button>
 
@@ -73,65 +76,50 @@ export default function RecipeDrawer({ recipe, onClose }) {
         ) : (
           <>
             <>
-  <h2>Edit Recipe</h2>
+              <h2>Edit Recipe</h2>
 
-  {/* NAME */}
-  <input
-    value={name}
-    onChange={(e) => setName(e.target.value)}
-    placeholder="Recipe name"
-  />
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Recipe name"
+              />
 
-  {/* IMAGE URL */}
-  <input
-    type="text"
-    placeholder="Image URL"
-    value={imageMode === "url" ? image : ""}
-    onChange={(e) => {
-      setImageMode("url");
-      setImage(e.target.value);
-    }}
-  />
+              <input
+                type="text"
+                placeholder="Image URL"
+                value={imageMode === "url" ? image : ""}
+                onChange={(e) => {
+                  setImageMode("url");
+                  setImage(e.target.value);
+                }}
+              />
 
-  {/* FILE UPLOAD */}
-  <input
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
+              <input
+                className="upload-prompt"
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  if (image && image.startsWith("blob:")) {
+                    URL.revokeObjectURL(image);
+                  }
+                  setImageMode("file");
+                  const preview = URL.createObjectURL(file);
+                  setImage(preview);
+                }}
+              />
 
-      setImageMode("file");
+              {image && <img src={image} alt="preview" />}
 
-      const preview = URL.createObjectURL(file);
-      setImage(preview);
-    }}
-  />
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Description"
+              />
 
-  {/* PREVIEW */}
-  {image && (
-    <img
-      src={image}
-      alt="preview"
-      style={{
-        width: "120px",
-        height: "120px",
-        objectFit: "cover",
-        marginTop: "10px",
-        borderRadius: "8px",
-      }}
-    />
-  )}
-
-  {/* DESCRIPTION */}
-  <textarea
-    value={description}
-    onChange={(e) => setDescription(e.target.value)}
-    placeholder="Description"
-  />
-
-  <button onClick={handleUpdate}>Save</button>
-</>
+              <button onClick={handleUpdate}>Save</button>
+            </>
           </>
         )}
       </div>
