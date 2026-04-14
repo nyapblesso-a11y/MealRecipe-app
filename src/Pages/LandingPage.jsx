@@ -7,6 +7,21 @@ function LandingPage() {
   const navigate = useNavigate();
 
   return (
+    <>
+    <header className="main-header">
+      <div className="header-inner">
+        <div className="logo" onClick={() => navigate("/")}>
+          FlavorNode<span>.</span>
+        </div>
+        
+        <div className="header-actions">
+        <span className="login-btn" onClick={() => navigate("/recipes")}>Recipes</span>
+          <button className="nav-primary-btn" onClick={() => navigate("/recipes")}>
+            Join Pro
+          </button>
+        </div>
+      </div>
+    </header>
     <div className="landing-container">
       <section className="hero">
         <div className="hero-content">
@@ -62,6 +77,23 @@ function LandingPage() {
         </div>
       </section>
     </div>
+    <footer className="flavor-footer">
+  <div className="footer-content">
+    <div className="footer-brand">
+      <h2>FlavorNode<span>.</span></h2>
+      <p>Stop messing about. Cook with precision.</p>
+    </div>
+    
+    <div className="footer-bottom">
+      <p>&copy; {new Date().getFullYear()} FlavorNode. Everything else is a distraction.</p>
+      <div className="footer-socials">
+        <a href="#">YouTube</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+    </>
   );
 }
 
