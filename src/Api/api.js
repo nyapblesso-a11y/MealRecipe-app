@@ -34,3 +34,11 @@ export const creatRecipeApi = async (data, isFile) => {
     return res.json();
   }
 }
+
+// delete recipe
+
+export const deleteRecipeApi = async(id) => {
+    const res = await fetch(`${BASE_URL}/${id}`, {
+        method: "DELETE",
+    })
+}
