@@ -42,3 +42,13 @@ export const deleteRecipeApi = async(id) => {
         method: "DELETE",
     })
 }
+
+// toggle favorite 
+
+export const toggleFavoriteApi = async(id) =>{
+    const res = await fetch(`${BASE_URL}/${id}/favorite`, {
+        method: "PATCH",
+    })
+
+    return res.json()
+}
