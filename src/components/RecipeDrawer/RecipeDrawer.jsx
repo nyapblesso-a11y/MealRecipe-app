@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRecipes } from "../../context/RecipeContext";
 import "./RecipeDrawer.css";
+import { deleteRecipeApi, updateRecipeAPI } from "../../Api/api";
 
 export default function RecipeDrawer({ recipe, onClose }) {
   const { dispatch } = useRecipes();
@@ -17,7 +18,6 @@ export default function RecipeDrawer({ recipe, onClose }) {
       setName(recipe.name || "");
       setImage(recipe.image || "");
       setDescription(recipe.description || "");
-      // detect mode
       if (
         recipe.image?.startsWith("data:") ||
         recipe.image?.startsWith("blob:")
@@ -32,21 +32,23 @@ export default function RecipeDrawer({ recipe, onClose }) {
 
   if (!recipe) return null;
 
-  function handleUpdate() {
+  async function handleUpdate() {
+    const res = await updateRecipeAPI(recipe.id, {
+      name, description, image
+    })
     dispatch({
       type: "UPDATE",
-      payload: {
-        id: recipe.id,
-        name,
-        image,
-        description,
-      },
+      payload: res.update
+     
     });
 
     setIsEditing(false);
   }
 
-  function handledelete() {
+  const handledelete = async() => {
+ 
+    await deleteRecipeApi(recipe.id)
+
     dispatch({
       type: "DELETE",
       payload: recipe.id,
@@ -115,7 +117,7 @@ export default function RecipeDrawer({ recipe, onClose }) {
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Description"
+                placeholder="Description/recipe"
               />
 
               <button onClick={handleUpdate}>Save</button>

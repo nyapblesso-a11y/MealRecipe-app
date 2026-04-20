@@ -5,17 +5,18 @@ import ReceipeForm from "../components/RecipeForm/ReceipeForm";
 import RecipeDrawer from "../components/RecipeDrawer/RecipeDrawer";
 import { useRecipes } from "../context/RecipeContext";
 
-
 function RecipePage() {
   const [selectRecipe, setSelectRecipe] = useState(null);
   const [search, setSearch] = useState("");
   const { state, dispatch } = useRecipes();
   const [filter, setFilter] = useState("all");
-
   const filteredRecipes = state.recipes
-    .filter((recipe) =>
-      recipe.name.toLowerCase().includes(search.toLowerCase())
-    )
+    .filter((recipe) => {
+      const name = recipe.name || "";
+      const query = search || "";
+
+      return name.toLowerCase().includes(query.toLowerCase());
+    })
     .filter((recipe) => (filter === "favorites" ? recipe.favorite : true));
   return (
     <>

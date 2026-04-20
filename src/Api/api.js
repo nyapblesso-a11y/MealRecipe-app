@@ -8,32 +8,35 @@ export const fetchRecipes = async () => {
 }
 
 // create recipes (file or Url Images)
-
 export const creatRecipeApi = async (data, isFile) => {
-   if (isFile) {
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("description", data.description);
-    formData.append("image", data.image);
+  const options = {
+    method: "POST",
+    body: data instanceof FormData ? data : JSON.stringify(data),
+  };
 
-    const res = await fetch(BASE_URL, {
-      method: "POST",
-      body: formData,
-    });
-
-    return res.json();
-  }else {
-    const res = await fetch(BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    return res.json();
+  if (!isFile) {
+    options.headers = {
+      "Content-Type": "application/json",
+    };
   }
-}
+
+  const res = await fetch(BASE_URL, options);
+  return res.json();
+};
+
+// handle update
+
+export const updateRecipeAPI = async (id, data) => {
+  const res = await fetch(`${BASE_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
+};
 
 // delete recipe
 
@@ -41,6 +44,8 @@ export const deleteRecipeApi = async(id) => {
     const res = await fetch(`${BASE_URL}/${id}`, {
         method: "DELETE",
     })
+
+    return res.json()
 }
 
 // toggle favorite 

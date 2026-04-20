@@ -1,132 +1,154 @@
 import React, { useState } from "react";
 import { useRecipes } from "../../context/RecipeContext";
 import "./RecipeForm.css";
+import { creatRecipeApi } from "../../Api/api";
+
 function ReceipeForm({ setSearch }) {
   const { dispatch } = useRecipes();
+
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [imageMode, setImageMode] = useState("url");
   const [description, setDescription] = useState("");
   const [showForm, setShowForm] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [preview, setPreview] = useState("");
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!name || !image) {
-      return;
-    }
+  if (!name) return;
 
-    const newRecipe = {
-      id: Date.now(),
+  let payload;
+  let isFile = false;
+
+  if (imageFile) {
+    payload = new FormData();
+    payload.append("name", name);
+    payload.append("description", description);
+    payload.append("image", imageFile);
+    isFile = true;
+  } else {
+    payload = {
       name,
-      image,
       description,
-      favorite: false,
+      imageUrl: imageUrl,
     };
+  }
 
-    dispatch({
-      type: "ADD",
-      payload: newRecipe,
-    });
+  const newRecipe = await creatRecipeApi(payload, isFile);
 
-    setImage("");
-    setName("");
-    setDescription("");
-    setShowForm(false);
-  };
+  dispatch({
+    type: "ADD",
+    payload: newRecipe.recipe || newRecipe,
+  });
+
+  setName("");
+  setDescription("");
+  setImageUrl("");
+  setImageFile(null);
+  setPreview("");
+  setShowForm(false);
+};
+
   return (
-    <>
-      <div className="container">
-        {!showForm && (
-          <button className="toggle-btn" onClick={() => setShowForm(true)}>
-            + Add New Recipe
-          </button>
-        )}
+    <div className="container">
+      {!showForm && (
+        <button className="toggle-btn" onClick={() => setShowForm(true)}>
+          + Add New Recipe
+        </button>
+      )}
 
-        {showForm && (
-          <div className="form-overlay">
-            <form className="form" onSubmit={handleSubmit}>
-              <div className="form-header">
-                <h3>Create Recipe</h3>
-                <button
-                  type="button"
-                  className="close-btn"
-                  onClick={() => setShowForm(false)}
-                >
-                  ✕
-                </button>
+      {showForm && (
+        <div className="form-overlay">
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="form-header">
+              <h3>Create Recipe</h3>
+              <button
+                type="button"
+                className="close-btn"
+                onClick={() => setShowForm(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="input-group">
+        
+              <input
+                type="text"
+                placeholder="Recipe name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+
+              <input
+                type="text"
+                placeholder="Image URL"
+                value={imageUrl}
+                onChange={(e) => {
+                  setImageUrl(e.target.value);
+                  setImageFile(null);
+                  setPreview(e.target.value);
+                }}
+              />
+
+              <div className="divider">
+                <span>OR</span>
               </div>
-              <div className="input-group">
-                <input
-                  type="text"
-                  placeholder="Recipe name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
 
+             
+              <label className="file-upload-zone">
                 <input
-                  type="text"
-                  placeholder="Image URL"
-                  value={imageMode === "url" ? image : ""}
+                  type="file"
+                  accept="image/*"
+                  className="hidden-input"
                   onChange={(e) => {
-                    setImageMode("url");
-                    setImage(e.target.value);
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+
+                    setImageFile(file);
+                    setImageUrl("");
+
+                    const objectUrl = URL.createObjectURL(file);
+                    setPreview(objectUrl);
                   }}
                 />
 
-                <div className="divider">
-                  <span>OR</span>
-                </div>
+                {!preview ? (
+                  <div className="upload-prompt">
+                    <p>Click to upload image</p>
+                  </div>
+                ) : (
+                  <div className="preview-container">
+                    <img
+                      src={preview}
+                      alt="preview"
+                      className="image-preview"
+                    />
+                    <div className="preview-overlay">Change Image</div>
+                  </div>
+                )}
+              </label>
 
-                <label className="file-upload-zone">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden-input"
-                    onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (!file) return;
-                      setImageMode("file");
-                      setImage(URL.createObjectURL(file));
-                    }}
-                  />
+              <textarea
+                placeholder="Recipe description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
 
-                  {!image ? (
-                    <div className="upload-prompt">
-                      {/* <span className="icon">📸</span> */}
-                      <p>Click to upload image</p>
-                    </div>
-                  ) : (
-                    <div className="preview-container">
-                      <img
-                        src={image}
-                        alt="preview"
-                        className="image-preview"
-                      />
-                      <div className="preview-overlay">Change Image</div>
-                    </div>
-                  )}
-                </label>
-
-                <textarea
-                  placeholder="Recipe description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <button
-                type="submit"
-                className="submit-btn"
-                onClick={() => setSearch("")}
-              >
-                Add Recipe
-              </button>
-            </form>
-          </div>
-        )}
-      </div>
-    </>
+            <button
+              type="submit"
+              className="submit-btn"
+              onClick={() => setSearch("")}
+            >
+              Add Recipe
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
   );
 }
 
