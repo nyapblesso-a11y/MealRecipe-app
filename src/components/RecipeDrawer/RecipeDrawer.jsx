@@ -117,7 +117,7 @@ export default function RecipeDrawer({ recipe, onClose }) {
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Description/recipe"
+                placeholder="recipe"
               />
 
               <button onClick={handleUpdate}>Save</button>
