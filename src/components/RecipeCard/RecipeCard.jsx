@@ -3,8 +3,9 @@ import "./RecipeCard.css";
 import { toggleFavoriteApi } from "../../Api/api";
 
 const getImageSrc = (image) => {
-  if (!image) return "";
+  if (!image) return null;
 
+  // external images or preview
   if (
     image.startsWith("http") ||
     image.startsWith("blob:") ||
@@ -13,8 +14,10 @@ const getImageSrc = (image) => {
     return image;
   }
 
+
   return `http://localhost:4040${image}`;
 };
+
 function RecipeCard({ recipe, onClick, dispatch }) {
   const handleToggleFavorite = async (e) => {
     e.stopPropagation();
@@ -31,6 +34,8 @@ function RecipeCard({ recipe, onClick, dispatch }) {
     }
   };
 
+  const imageSrc = getImageSrc(recipe.image);
+
   return (
     <div className="card" onClick={onClick}>
       <div
@@ -40,9 +45,10 @@ function RecipeCard({ recipe, onClick, dispatch }) {
         {recipe.favorite ? "❤️" : "🤍"}
       </div>
 
-      {recipe.image && (
+  
+      {imageSrc && (
         <div className="card-image-box">
-          <img src={recipe.image} alt={recipe.name} />
+          <img src={imageSrc} alt={recipe.name} />
         </div>
       )}
 
@@ -54,4 +60,5 @@ function RecipeCard({ recipe, onClick, dispatch }) {
     </div>
   );
 }
+
 export default RecipeCard;

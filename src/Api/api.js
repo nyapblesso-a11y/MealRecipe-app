@@ -8,22 +8,37 @@ export const fetchRecipes = async () => {
 }
 
 // create recipes (file or Url Images)
-export const creatRecipeApi = async (data, isFile) => {
-  const options = {
-    method: "POST",
-    body: data instanceof FormData ? data : JSON.stringify(data),
-  };
 
-  if (!isFile) {
-    options.headers = {
-      "Content-Type": "application/json",
+export const creatRecipeApi = async (data, isFile) => {
+  let options;
+
+  if (isFile) {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("image", data.image);
+
+    options = {
+      method: "POST",
+      body: formData,
+    };
+  } else {
+    options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: data.name,
+        description: data.description,
+        imageUrl: data.image,
+      }),
     };
   }
 
   const res = await fetch(BASE_URL, options);
   return res.json();
 };
-
 // handle update
 
 export const updateRecipeAPI = async (id, data) => {
@@ -38,7 +53,7 @@ export const updateRecipeAPI = async (id, data) => {
   return res.json();
 };
 
-// delete recipe
+// deletee recipe
 
 export const deleteRecipeApi = async(id) => {
     const res = await fetch(`${BASE_URL}/${id}`, {

@@ -214,7 +214,7 @@
   }
 }
 .flavor-footer {
-  background: var(--bg-body); /* Matches your landing page background */
+  background: var(--bg-body);
   padding: 60px 20px 40px;
   border-top: 1px solid var(--input-border);
   display: flex;

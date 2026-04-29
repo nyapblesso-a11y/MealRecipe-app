@@ -13,29 +13,22 @@ function ReceipeForm({ setSearch }) {
   const [imageUrl, setImageUrl] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState("");
+  
 const handleSubmit = async (e) => {
   e.preventDefault();
 
   if (!name) return;
 
-  let payload;
-  let isFile = false;
+  const isFile = !!imageFile;
 
-  if (imageFile) {
-    payload = new FormData();
-    payload.append("name", name);
-    payload.append("description", description);
-    payload.append("image", imageFile);
-    isFile = true;
-  } else {
-    payload = {
+  const newRecipe = await creatRecipeApi(
+    {
       name,
       description,
-      imageUrl: imageUrl,
-    };
-  }
-
-  const newRecipe = await creatRecipeApi(payload, isFile);
+      image: imageFile || imageUrl,
+    },
+    isFile
+  );
 
   dispatch({
     type: "ADD",
@@ -49,7 +42,6 @@ const handleSubmit = async (e) => {
   setPreview("");
   setShowForm(false);
 };
-
   return (
     <div className="container">
       {!showForm && (
