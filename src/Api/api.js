@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4040/api/recipes"
+const BASE_URL = "https://meal-recipe-server.onrender.com"
 
 // Get all Recipes
 
