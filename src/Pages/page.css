@@ -195,24 +195,29 @@
 }
 
 @media (max-width: 900px) {
+  .landing-container {
+    height: auto; 
+    padding-top: 120px; 
+  }
+
   .hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; 
+    gap: 40px;
     text-align: center;
   }
-  .hero-title {
-    font-size: 2.8rem;
-  }
-  .hero-subtitle {
-    margin: 0 auto 40px auto;
-  }
-  .actions {
-    justify-content: center;
-    flex-direction: column;
-  }
+
   .hero-visual {
-    display: none;
+    display: flex; 
+    justify-content: center;
+    width: 100%;
+  }
+
+  .glass-card {
+    max-width: 400px; 
+    margin: 0 auto;
   }
 }
+
 .flavor-footer {
   background: var(--bg-body);
   padding: 60px 20px 40px;
