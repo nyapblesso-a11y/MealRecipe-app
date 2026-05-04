@@ -1,12 +1,17 @@
-const BASE_URL = "https://meal-recipe-server.onrender.com/api/recipes";
+// const BASE_URL = "https://meal-recipe-server.onrender.com/api/recipes";
+const BASE_URL = "http://localhost:4040/api/recipes";
 
 // Get all Recipes
 
 export const fetchRecipes = async () => {
   const res = await fetch(BASE_URL);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch recipes");
+  }
+
   return res.json();
 };
-
 // create recipes (file or Url Images)
 
 export const creatRecipeApi = async (data, isFile) => {
