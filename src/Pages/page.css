@@ -76,21 +76,14 @@
   box-shadow: 0 4px 15px rgba(147, 51, 234, 0.2);
 }
 
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: none; 
-  }
-}
-
 .landing-container {
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 100px 20px 60px; 
   background: var(--bg-body);
-  overflow: hidden;
+  overflow-x: hidden; 
 }
 
 .hero {
@@ -98,6 +91,7 @@
   grid-template-columns: 1.2fr 0.8fr;
   gap: 60px;
   max-width: 1200px;
+  width: 100%;
   align-items: center;
 }
 
@@ -194,29 +188,6 @@
   margin-bottom: 15px;
 }
 
-@media (max-width: 900px) {
-  .landing-container {
-    height: auto; 
-    padding-top: 120px; 
-  }
-
-  .hero {
-    grid-template-columns: 1fr; 
-    gap: 40px;
-    text-align: center;
-  }
-
-  .hero-visual {
-    display: flex; 
-    justify-content: center;
-    width: 100%;
-  }
-
-  .glass-card {
-    max-width: 400px; 
-    margin: 0 auto;
-  }
-}
 
 .flavor-footer {
   background: var(--bg-body);
@@ -245,7 +216,7 @@
 }
 
 .footer-brand h2 span {
-  color: #ef4444; /* Ramsay Red */
+  color: #ef4444; 
 }
 
 .footer-brand p {
@@ -281,10 +252,92 @@
   opacity: 0.7;
 }
 
-/* Responsive fix */
-@media (max-width: 600px) {
+
+
+
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 0 20px;
+  }
+  
+  .nav-links {
+    display: none; 
+  }
+
+  .login-btn {
+    display: none; 
+  }
+}
+
+
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr; 
+    gap: 50px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 2.8rem; 
+    margin: 0 auto 20px;
+  }
+
+  .hero-subtitle {
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+  }
+
+  .actions {
+    justify-content: center; 
+    flex-direction: column; 
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .primary-btn, .secondary-btn {
+    width: 100%;
+  }
+
+  .hero-visual {
+    order: -1; 
+    width: 100%;
+  }
+
+  .glass-card {
+    width: 100%;
+    max-width: 350px; 
+    padding: 20px; 
+  }
+
+  .glass-card img {
+    height: 200px; 
+  }
+}
+
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem; 
+  }
+
+  .landing-container {
+    padding-top: 90px;
+  }
+
+  .glass-card {
+    padding: 15px;
+    border-radius: 20px;
+  }
+  
   .footer-bottom {
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
   }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }

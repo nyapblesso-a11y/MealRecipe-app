@@ -63,7 +63,7 @@ function LandingPage() {
             </button>
           </div>
         </div>
-        {/* <div className="hero-visual">
+        <div className="hero-visual">
           <div className="glass-card">
             <img
               src="https://images.ctfassets.net/3s5io6mnxfqz/6lmLSgTSH5Lgi7z59asp25/27eaea12087d66e6be41eac392e0f15b/63__Scene_C_DSC01914.jpg?w=828"
@@ -74,7 +74,7 @@ function LandingPage() {
               <p>Version 1.0.4 - Latest Update</p>
             </div>
           </div>
-        </div> */}
+        </div>
       </section>
     </div>
     <footer className="flavor-footer">
