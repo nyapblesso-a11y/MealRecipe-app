@@ -1,40 +1,67 @@
-
+/* --- OVERLAY --- */
 .drawer-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2000;
+  z-index: 3000;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(15, 23, 42, 0.4);
   animation: fadeIn 0.3s ease-out;
 }
 
-
+/* --- DRAWER CONTAINER --- */
 .drawer {
   position: fixed;
   top: 0;
   right: 0;
-  width: 380px; 
+  width: 420px; 
   height: 100%;
-  background: white;
-  padding: 60px 30px 30px 30px; 
-  box-shadow: -10px 0 40px rgba(147, 51, 234, 0.15);
+  background: #ffffff;
+  padding: 80px 30px 40px; 
+  box-shadow: -15px 0 50px rgba(15, 23, 42, 0.1);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* --- TYPOGRAPHY & ELEMENTS --- */
+.drawer h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #9333ea, #db2777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.drawer-desc {
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  margin-bottom: 30px;
+}
+
+.drawer-hero-img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 24px;
+  margin-bottom: 25px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* --- BUTTONS --- */
 .close-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 36px;
-  height: 36px;
+  top: 25px;
+  right: 25px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: none;
   background: #f1f5f9;
@@ -44,8 +71,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  z-index: 10;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .close-btn:hover {
@@ -54,85 +80,73 @@
   transform: rotate(90deg);
 }
 
-.drawer h2 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin: 0;
+/* Actions */
+.drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.edit-btn, .save-btn {
+  padding: 18px;
   background: linear-gradient(90deg, #9333ea, #db2777);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
-.drawer p {
-  color: #64748b;
-  line-height: 1.6;
-  font-size: 1rem;
+.delete-btn-text, .cancel-btn {
+  background: transparent;
+  color: #ef4444;
+  border: none;
+  font-weight: 700;
+  padding: 10px;
+  cursor: pointer;
 }
 
-.drawer img {
-  width: 100%;
-  aspect-ratio: 1 / 1; 
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+/* --- EDIT FORM SPECIFICS --- */
+.drawer-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 0;
 }
 
-.drawer input, 
-.drawer textarea {
-  width: 100%;
+.drawer-input-group label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-top: 15px;
+}
+
+.drawer-input-group input, 
+.drawer-input-group textarea {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   padding: 14px;
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  background: #f8fafc;
   font-family: inherit;
   outline: none;
+  color: #1e293b;
 }
 
-.drawer input:focus, 
-.drawer textarea:focus {
-  border-color: #9333ea;
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.05);
-}
-
-.drawer textarea {
-  min-height: 150px;
+.drawer-input-group textarea {
+  min-height: 120px;
   resize: none;
 }
 
-.drawer button:not(.close-btn) {
-  padding: 16px;
-  border: none;
-  border-radius: 14px;
-  color: white;
-  font-weight: 700;
-  font-size: 1rem;
-  background: linear-gradient(90deg, #9333ea, #db2777);
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.drawer button:hover {
-  opacity: 0.9;
-}
-
-.upload-prompt {
-   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-sub);
-  font-size: 0.85rem;
-  gap: 5px;
-}
-
-img {
-   width: "120px";
-  height: "120px";
-  object-fit: "cover";
-  margin-top: "10px";
-  border-radius: "8px";
+.drawer-image-preview img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 10px 0;
+  border: 1px solid #e2e8f0;
 }
 
 @keyframes slideIn {
@@ -145,15 +159,10 @@ img {
   to { opacity: 1; }
 }
 
-@media (max-width: 400px) {
+
+@media (max-width: 480px) {
   .drawer {
     width: 100%; 
-    padding: 60px 20px 20px 20px;
+    padding: 70px 20px 20px;
   }
 }
-
-body.dark .drawer {
-  background: #1e1e1e;
-  color: white;
-}
-

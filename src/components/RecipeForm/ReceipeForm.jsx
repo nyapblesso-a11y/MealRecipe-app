@@ -49,58 +49,87 @@ function RecipeForm({ setSearch }) {
     <div className="container">
       {!showForm && (
         <button className="toggle-btn" onClick={() => setShowForm(true)}>
-          + Add New Recipe
+          <span>+</span> Add New Recipe
         </button>
       )}
 
       {showForm && (
         <div className="form-overlay">
           <form className="form" onSubmit={handleSubmit}>
-            <h3>Create Recipe</h3>
+            <div className="form-header">
+              <h3>Create Recipe</h3>
+              <button 
+                type="button" 
+                className="close-btn" 
+                onClick={() => setShowForm(false)}
+              >
+                ✕
+              </button>
+            </div>
 
-            <input
-              type="text"
-              placeholder="Recipe name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Recipe name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
 
-            <input
-              type="text"
-              placeholder="Image URL"
-              value={imageUrl}
-              onChange={(e) => {
-                setImageUrl(e.target.value);
-                setImageFile(null);
-                setPreview(e.target.value);
-              }}
-            />
+              <input
+                type="text"
+                placeholder="Image URL"
+                value={imageUrl}
+                onChange={(e) => {
+                  setImageUrl(e.target.value);
+                  setImageFile(null);
+                  setPreview(e.target.value);
+                }}
+              />
 
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
+              <div className="divider">
+                <span>OR</span>
+              </div>
 
-                setImageFile(file);
-                setImageUrl("");
+              <label className="file-upload-zone">
+                <input
+                  type="file"
+                  className="hidden-input"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    setImageFile(file);
+                    setImageUrl("");
+                    const url = URL.createObjectURL(file);
+                    setPreview(url);
+                  }}
+                />
+                
+                {preview ? (
+                  <div className="preview-container">
+                    <img src={preview} alt="preview" className="image-preview" />
+                    <div className="preview-overlay">Change Image</div>
+                  </div>
+                ) : (
+                  <div className="upload-prompt">
+                    <span className="icon"></span>
+                    <span>Click to upload photo</span>
+                  </div>
+                )}
+              </label>
 
-                const url = URL.createObjectURL(file);
-                setPreview(url);
-              }}
-            />
+              <textarea
+                placeholder="Recipe description"
+                value={description}
+                rows="4"
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
 
-            {preview && <img src={preview} alt="preview" />}
-
-            <textarea
-              placeholder="Recipe description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-
-            <button type="submit">Add Recipe</button>
+            <button type="submit" className="submit-btn">
+              Add Recipe
+            </button>
           </form>
         </div>
       )}
