@@ -2,22 +2,6 @@ import React from "react";
 import "./RecipeCard.css";
 import { toggleFavoriteApi } from "../../Api/api";
 
-const getImageSrc = (image) => {
-  if (!image) return null;
-
-  // external images or preview
-  if (
-    image.startsWith("http") ||
-    image.startsWith("blob:") ||
-    image.startsWith("data:")
-  ) {
-    return image;
-  }
-
-
-  return `http://localhost:4040${image}`;
-};
-
 function RecipeCard({ recipe, onClick, dispatch }) {
   const handleToggleFavorite = async (e) => {
     e.stopPropagation();
@@ -34,8 +18,6 @@ function RecipeCard({ recipe, onClick, dispatch }) {
     }
   };
 
-  const imageSrc = getImageSrc(recipe.image);
-
   return (
     <div className="card" onClick={onClick}>
       <div
@@ -45,10 +27,9 @@ function RecipeCard({ recipe, onClick, dispatch }) {
         {recipe.favorite ? "❤️" : "🤍"}
       </div>
 
-  
-      {imageSrc && (
+      {recipe.image && (
         <div className="card-image-box">
-          <img src={imageSrc} alt={recipe.name} />
+          <img src={recipe.image} alt={recipe.name} />
         </div>
       )}
 

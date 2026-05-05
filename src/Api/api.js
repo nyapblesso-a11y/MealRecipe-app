@@ -1,19 +1,17 @@
-const BASE_URL = "https://meal-recipe-server.onrender.com/api/recipes";
-// const BASE_URL = "http://localhost:4040/api/recipes";
+// const BASE_URL = "https://meal-recipe-server.onrender.com/api/recipes";
 
-// Get all Recipes
+ const BASE_URL = "http://localhost:3000/api/recipes";
 
+// GET all recipes
 export const fetchRecipes = async () => {
   const res = await fetch(BASE_URL);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch recipes");
-  }
+  if (!res.ok) throw new Error("Failed to fetch recipes");
 
   return res.json();
 };
-// create recipes (file or Url Images)
 
+// CREATE recipe
 export const creatRecipeApi = async (data, isFile) => {
   let options;
 
@@ -30,9 +28,7 @@ export const creatRecipeApi = async (data, isFile) => {
   } else {
     options = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: data.name,
         description: data.description,
@@ -44,22 +40,19 @@ export const creatRecipeApi = async (data, isFile) => {
   const res = await fetch(BASE_URL, options);
   return res.json();
 };
-// handle update
 
+// UPDATE
 export const updateRecipeAPI = async (id, data) => {
   const res = await fetch(`${BASE_URL}/${id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
 
   return res.json();
 };
 
-// deletee recipe
-
+// DELETE
 export const deleteRecipeApi = async (id) => {
   const res = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
@@ -68,8 +61,7 @@ export const deleteRecipeApi = async (id) => {
   return res.json();
 };
 
-// toggle favorite
-
+// TOGGLE FAVORITE
 export const toggleFavoriteApi = async (id) => {
   const res = await fetch(`${BASE_URL}/${id}/favorite`, {
     method: "PATCH",

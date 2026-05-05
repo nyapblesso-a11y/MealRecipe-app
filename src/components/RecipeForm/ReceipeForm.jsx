@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useRecipes } from "../../context/RecipeContext";
 import "./RecipeForm.css";
-import { creatRecipeApi } from "../../Api/api";
+import { creatRecipeApi, fetchRecipes } from "../../Api/api";
 
-function ReceipeForm({ setSearch }) {
+function RecipeForm({ setSearch }) {
   const { dispatch } = useRecipes();
 
   const [name, setName] = useState("");
@@ -13,35 +13,38 @@ function ReceipeForm({ setSearch }) {
   const [imageUrl, setImageUrl] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState("");
-  
-const handleSubmit = async (e) => {
-  e.preventDefault();
 
-  if (!name) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name) return;
 
-  const isFile = !!imageFile;
+    const isFile = !!imageFile;
 
-  const newRecipe = await creatRecipeApi(
-    {
-      name,
-      description,
-      image: imageFile || imageUrl,
-    },
-    isFile
-  );
+    await creatRecipeApi(
+      {
+        name,
+        description,
+        image: imageFile || imageUrl,
+      },
+      isFile
+    );
 
-  dispatch({
-    type: "ADD",
-    payload: newRecipe.recipe || newRecipe,
-  });
+    // 🔥 IMPORTANT: re-fetch from DB (fixes disappearing issue)
+    const updatedRecipes = await fetchRecipes();
 
-  setName("");
-  setDescription("");
-  setImageUrl("");
-  setImageFile(null);
-  setPreview("");
-  setShowForm(false);
-};
+    dispatch({
+      type: "SET_RECIPES",
+      payload: updatedRecipes,
+    });
+
+    setName("");
+    setDescription("");
+    setImageUrl("");
+    setImageFile(null);
+    setPreview("");
+    setShowForm(false);
+  };
+
   return (
     <div className="container">
       {!showForm && (
@@ -53,90 +56,51 @@ const handleSubmit = async (e) => {
       {showForm && (
         <div className="form-overlay">
           <form className="form" onSubmit={handleSubmit}>
-            <div className="form-header">
-              <h3>Create Recipe</h3>
-              <button
-                type="button"
-                className="close-btn"
-                onClick={() => setShowForm(false)}
-              >
-                ✕
-              </button>
-            </div>
+            <h3>Create Recipe</h3>
 
-            <div className="input-group">
-        
-              <input
-                type="text"
-                placeholder="Recipe name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
+            <input
+              type="text"
+              placeholder="Recipe name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
 
-              <input
-                type="text"
-                placeholder="Image URL"
-                value={imageUrl}
-                onChange={(e) => {
-                  setImageUrl(e.target.value);
-                  setImageFile(null);
-                  setPreview(e.target.value);
-                }}
-              />
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={imageUrl}
+              onChange={(e) => {
+                setImageUrl(e.target.value);
+                setImageFile(null);
+                setPreview(e.target.value);
+              }}
+            />
 
-              <div className="divider">
-                <span>OR</span>
-              </div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
 
-             
-              <label className="file-upload-zone">
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden-input"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
+                setImageFile(file);
+                setImageUrl("");
 
-                    setImageFile(file);
-                    setImageUrl("");
+                const url = URL.createObjectURL(file);
+                setPreview(url);
+              }}
+            />
 
-                    const objectUrl = URL.createObjectURL(file);
-                    setPreview(objectUrl);
-                  }}
-                />
+            {preview && <img src={preview} alt="preview" />}
 
-                {!preview ? (
-                  <div className="upload-prompt">
-                    <p>Click to upload image</p>
-                  </div>
-                ) : (
-                  <div className="preview-container">
-                    <img
-                      src={preview}
-                      alt="preview"
-                      className="image-preview"
-                    />
-                    <div className="preview-overlay">Change Image</div>
-                  </div>
-                )}
-              </label>
+            <textarea
+              placeholder="Recipe description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
-              <textarea
-                placeholder="Recipe description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="submit-btn"
-              onClick={() => setSearch("")}
-            >
-              Add Recipe
-            </button>
+            <button type="submit">Add Recipe</button>
           </form>
         </div>
       )}
@@ -144,4 +108,4 @@ const handleSubmit = async (e) => {
   );
 }
 
-export default ReceipeForm;
+export default RecipeForm;
