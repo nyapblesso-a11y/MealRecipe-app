@@ -1,6 +1,5 @@
-// const BASE_URL = "https://meal-recipe-server.onrender.com/api/recipes";
+ const BASE_URL = "https://meal-recipe-server.onrender.com/api/recipes";
 
- const BASE_URL = "http://localhost:3000/api/recipes";
 
 // GET all recipes
 export const fetchRecipes = async () => {
