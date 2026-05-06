@@ -127,14 +127,14 @@ export default function RecipeDrawer({ recipe, onClose }) {
                 }}
               />
 
-              {/* fallback URL input */}
+              
               <input
                 value={typeof image === "string" ? image : ""}
                 onChange={(e) => setImage(e.target.value)}
                 placeholder="Or paste image URL"
               />
 
-              {/* PREVIEW FIXED */}
+            
               {image && (
                 <div className="drawer-image-preview">
                   <img
