@@ -25,23 +25,34 @@ export default function RecipeDrawer({ recipe, onClose }) {
   }, [recipe]);
 
   if (!recipe) return null;
+  
+async function handleUpdate() {
+  let payload;
 
-  const handleUpdate = async () => {
-    await updateRecipeAPI(recipe.id, {
+  const isFile = image instanceof File;
+
+  if (isFile) {
+    payload = new FormData();
+    payload.append("name", name);
+    payload.append("description", description);
+    payload.append("image", image);
+  } else {
+    payload = {
       name,
       description,
       image,
-    });
+    };
+  }
 
-    const updated = await fetchRecipes();
+  const res = await updateRecipeAPI(recipe.id, payload);
 
-    dispatch({
-      type: "SET_RECIPES",
-      payload: updated,
-    });
+  dispatch({
+    type: "UPDATE",
+    payload: res.update,
+  });
 
-    setIsEditing(false);
-  };
+  setIsEditing(false);
+}
 
   const handleDelete = async () => {
     await deleteRecipeApi(recipe.id);
