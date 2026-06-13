@@ -7,12 +7,9 @@ function RecipeCard({ recipe, onClick, dispatch }) {
     e.stopPropagation();
 
     try {
-      const res = await toggleFavoriteApi(recipe.id);
+      await toggleFavoriteApi(recipe.id);
 
-      dispatch({
-        type: "UPDATE",
-        payload: res.update,
-      });
+      dispatch({ type: "TOGGLE_FAVORITE", payload: recipe.id });
     } catch (err) {
       console.error(err);
     }
