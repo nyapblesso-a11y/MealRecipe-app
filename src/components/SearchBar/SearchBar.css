@@ -1,0 +1,229 @@
+
+:root {
+
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --header-border: rgba(147, 51, 234, 0.1);
+  --text-main: #0f172a;
+  --text-sub: #64748b;
+  --input-bg: #f8fafc;
+  --input-border: #f1f5f9;
+  --track-bg: #f1f5f9;
+  --card-bg: #ffffff;
+}
+
+body.dark {
+  --header-bg: rgba(15, 23, 42, 0.9);
+  --header-border: rgba(147, 51, 234, 0.3);
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --input-bg: #1e293b;
+  --input-border: #334155;
+  --track-bg: #0f172a;
+  --card-bg: #1e293b;
+}
+
+.app-header {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px; 
+  background: var(--header-bg); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--header-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.app-logo {
+  width: 42px; 
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.app-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(147, 51, 234, 0.2));
+}
+
+.logo-section:hover .app-logo {
+  transform: rotate(-12deg) scale(1.1);
+}
+
+.app-title {
+  font-size: 1.4rem; 
+  font-weight: 900;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: -0.04em;
+}
+
+.app-title span {
+  background: linear-gradient(135deg, #9333ea, #db2777); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 15px;
+}
+
+
+.search-container {
+  position: relative;
+  flex: 1; 
+  max-width: 320px; 
+  min-width: 200px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 16px 10px 42px; 
+  border-radius: 14px; 
+  border: 1.5px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-input:focus {
+  border-color: #9333ea;
+  background: var(--card-bg);
+  box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.15);
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.them {
+  padding: 4px;
+  background: var(--track-bg); 
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.them button {
+  padding: 8px 16px;
+  border: none;
+  background: var(--card-bg);
+  color: var(--text-main); 
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+@media (max-width: 850px) {
+  .app-header {
+    padding: 15px 20px;
+  }
+
+  .search-container {
+    order: 3; 
+    max-width: 100%;
+    width: 100%;
+    flex: none;
+  }
+  
+  .filter {
+    order: 4;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .them {
+    order: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    display: none; 
+  }
+  
+  .app-header {
+    gap: 10px;
+  }
+}
+.filter {
+  display: flex;
+  gap: 12px; 
+  background: var(--track-bg);
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid var(--header-border);
+  width: fit-content;
+}
+
+.filter button {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-sub);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;    
+  right: -5px;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 2px 6px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  border-radius: 10px;
+  background: var(--primary-gradient);
+  color: white;
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.filter button:hover .badge {
+  transform: scale(1.2) translateY(-2px);
+}
+
+.filter button.active {
+  background: var(--card-bg);
+  color: #9333ea;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.1);
+}
