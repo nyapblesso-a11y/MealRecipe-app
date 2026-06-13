@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRecipes } from "../../context/RecipeContext";
 import "./RecipeForm.css";
-import { creatRecipeApi, fetchRecipes } from "../../Api/api";
+import { creatRecipeApi } from "../../Api/api";
 
 function RecipeForm({ setSearch }) {
   const { dispatch } = useRecipes();
@@ -9,7 +9,6 @@ function RecipeForm({ setSearch }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [showForm, setShowForm] = useState(false);
-
   const [imageUrl, setImageUrl] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState("");
@@ -20,22 +19,12 @@ function RecipeForm({ setSearch }) {
 
     const isFile = !!imageFile;
 
-    await creatRecipeApi(
-      {
-        name,
-        description,
-        image: imageFile || imageUrl,
-      },
+    const newRecipe = await creatRecipeApi(
+      { name, description, image: imageFile || imageUrl },
       isFile
     );
 
-    // 🔥 IMPORTANT: re-fetch from DB (fixes disappearing issue)
-    const updatedRecipes = await fetchRecipes();
-
-    dispatch({
-      type: "SET_RECIPES",
-      payload: updatedRecipes,
-    });
+    dispatch({ type: "ADD", payload: newRecipe });
 
     setName("");
     setDescription("");
@@ -58,9 +47,9 @@ function RecipeForm({ setSearch }) {
           <form className="form" onSubmit={handleSubmit}>
             <div className="form-header">
               <h3>Create Recipe</h3>
-              <button 
-                type="button" 
-                className="close-btn" 
+              <button
+                type="button"
+                className="close-btn"
                 onClick={() => setShowForm(false)}
               >
                 ✕
@@ -101,11 +90,10 @@ function RecipeForm({ setSearch }) {
                     if (!file) return;
                     setImageFile(file);
                     setImageUrl("");
-                    const url = URL.createObjectURL(file);
-                    setPreview(url);
+                    setPreview(URL.createObjectURL(file));
                   }}
                 />
-                
+
                 {preview ? (
                   <div className="preview-container">
                     <img src={preview} alt="preview" className="image-preview" />
